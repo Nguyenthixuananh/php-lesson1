@@ -1,119 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ung dung do so thanh chu</title>
+    <title>Read numbers into letters </title>
 </head>
 <body>
-<form method="post">
-    <input type="text" placeholder="Enter a number" name="number">
-    <button type="submit">Read</button>
+<h2>Read numbers</h2>
+<form>
+    <input type="text" name="search" placeholder="Enter number"/>
+    <input type="submit" id="submit" value="Read"/>
 </form>
-</body>
-</html>
 <?php
-$arr = [
-    '1' => 'one',
-    '2' => 'two',
-    '3' => 'three',
-    '4' => 'four',
-    '5' => 'five',
-    '6' => 'six',
-    '7' => 'seven',
-    '8' => 'eight',
-    '9' => 'nine',
-];
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $number = $_POST["number"];
-    if ($number < 0 && $number > 999) {
-        echo "out of ability";
+$num = $_REQUEST["search"];
+if ($num < 20 && $num >= 0){
+    switch ($num < 10 && $num >= 0) {
+        case $num==0:echo "Zero"; break;
+        case $num==1:echo "One"; break;
+        case $num==2: echo "Two"; break;
+        case $num==3:echo "Three"; break;
+        case $num==4: echo "Four"; break;
+        case $num==5:echo "Five"; break;
+        case $num==6:echo "Six"; break;
+        case $num==7:echo "Seven"; break;
+        case $num==8:echo "Eight"; break;
+        case $num==9:echo "Nine"; break;
     }
-    if ($number == 0) {
-        echo 'zero';
-    }
-    if ($number > 0 and $number < 10) {
-        foreach ($arr as $key => $value)
-            if ($number == $key)
-                echo $value;
-    };
-    if ($number == 10) {
-        echo 'ten';
-    }
-    if ($number == 11) {
-        echo 'eleven';
-    }
-    if ($number == 12) {
-        echo 'twelve';
-    }
-    if ($number == 13) {
-        echo 'thirteen';
-    }
-    if ($number == 14) {
-        echo 'fourteen';
-    }
-    if ($number == 15) {
-        echo 'fifteen';
-    }
-    if ($number > 15 and $number < 20) {
-        foreach ($arr as $key => $value)
-            if (($number % 10) == $key)
-                echo $value . 'teen';
-    };
-    if ($number == 20) {
-        echo 'twenty';
-    }
-    if ($number > 20 and $number < 30) {
-        foreach ($arr as $key => $value)
-            if (($number % 10) == $key)
-                echo 'twenty ' . $value;
-    }
-    if ($number >= 30 and $number < 100) {
-        foreach ($arr as $key => $value)
-            if (($number % 10) == $key) {
-                $units = $value;
-                $number /= 10;
-            }
-        foreach ($arr as $key => $value)
-            if (($number % 10) == $key) {
-                echo $value . 'ty ' . $units;
-            }
-    if ($number == 100) {
-        echo 'hundreds';
-    }
-
-
-
-        if ($number > 100 and $number < 1000) {
-            if (($number % 100) > 20 and ($number % 100) < 30) {
-                foreach ($arr as $key => $value) {
-                    if (($number % 10) == $key)
-                        $units = $value;
-                }
-                foreach ($arr as $key => $value) {
-                    if (($number / 100) == $key)
-                        echo $value . ' hundred and twenty ' . $units;
-                }
-            } else {
-                foreach ($arr as $key => $value)
-                    if (($number % 10) == $key) {
-                        $units = $value;
-                        $number /= 10;
-                    }
-                foreach ($arr as $key => $value)
-                    if (($number % 10) == $key) {
-                        $dozens = $value;
-                        $number /= 10;
-                    }
-                foreach ($arr as $key => $value)
-                    if (($number % 10) == $key) {
-                        echo $value . ' hundred and ' . $dozens . 'ty ' . $units;
-                    }
-            }
-        };
+    switch ($num < 20 && $num >= 10) {
+        case $num==10: echo "Ten"; break;
+        case $num==11: echo "Eleven"; break;
+        case $num==12: echo "Twelve"; break;
+        case $num==13: echo "Thirteen"; break;
+        case $num==14: echo "Fourteen"; break;
+        case $num==15: echo "Fifteen"; break;
+        case $num==16: echo "Sixteen"; break;
+        case $num==17: echo "Seventeen"; break;
+        case $num==18: echo "Eighteen"; break;
+        case $num==19: echo "Nineteen"; break;
     }
 }
+if ($num >= 20 && $num <100) {
+    $a = $num % 10;
+    $b = ($num/10) % 10;
+    switch ($b) {
+        case 2; echo "Twenty "; break;
+        case 3; echo "Thirty "; break;
+        case 4; echo "Forty "; break;
+        case 5; echo "Fifty "; break;
+        case 6; echo "Sixty "; break;
+        case 7; echo "Seventy "; break;
+        case 8; echo "Eighty "; break;
+        case 9; echo "Ninety "; break;
+    }
+    switch ($a) {
+        case 1:echo " One"; break;
+        case 2: echo " Two"; break;
+        case 3:echo " Three"; break;
+        case 4: echo " Four"; break;
+        case 5:echo " Five"; break;
+        case 6:echo " Six"; break;
+        case 7:echo " Seven"; break;
+        case 8:echo " Eight"; break;
+        case 9:echo " Nine"; break;
+    }
+}
+if ($num>+100 && $num<=999) {
+    $a = $num % 10;
+    $b = ($num/10) % 10;
+    $c = ($num/100) % 10;
+    if ($b%10!=1) {
+        switch ($c) {
+            case 1: echo "One hundreds "; break;
+            case 2: echo "Two hundreds "; break;
+            case 3: echo "Three hundreds "; break;
+            case 4: echo "Four hundreds "; break;
+            case 5: echo "Five hundreds "; break;
+            case 6: echo "Six hundreds "; break;
+            case 7: echo "Seven hundreds "; break;
+            case 8: echo "Eight hundreds "; break;
+            case 9: echo "Nine hundreds "; break;
+        }
+        if ($b%10==0 && $a !=0) {
+            echo("and ");
+        }
+        switch ($b) {
+            case 2; echo "Twenty "; break;
+            case 3; echo "Thirty "; break;
+            case 4; echo "Forty "; break;
+            case 5; echo "Fifty "; break;
+            case 6; echo "Sixty "; break;
+            case 7; echo "Seventy "; break;
+            case 8; echo "Eighty "; break;
+            case 9; echo "Ninety "; break;
+        }
+        switch ($a) {
+            case 1:echo "One"; break;
+            case 2: echo "Two"; break;
+            case 3:echo "Three"; break;
+            case 4: echo "Four"; break;
+            case 5:echo "Five"; break;
+            case 6:echo "Six"; break;
+            case 7:echo "Seven"; break;
+            case 8:echo "Eight"; break;
+            case 9:echo "Nine"; break;
+        }
+    }
+    if ($b%10==1) {
+        switch ($c) {
+            case 1: echo "One hundreds "; break;
+            case 2: echo "Two hundreds "; break;
+            case 3: echo "Three hundreds "; break;
+            case 4: echo "Four hundreds "; break;
+            case 5: echo "Five hundreds "; break;
+            case 6: echo "Six hundreds "; break;
+            case 7: echo "Seven hundreds "; break;
+            case 8: echo "Eight hundreds "; break;
+            case 9: echo "Nine hundreds "; break;
+        }
 
+        switch ($a) {
+            case 0; echo "Ten"; break;
+            case 1; echo "Eleven"; break;
+            case 2; echo "Twelve"; break;
+            case 3; echo "Thirteen"; break;
+            case 4; echo "Fourteen"; break;
+            case 5; echo "Fiveteen"; break;
+            case 6; echo "Sixteen"; break;
+            case 7; echo "Seventeen"; break;
+            case 8; echo "Eighteen"; break;
+            case 9; echo "Nineteen"; break;
+        }
+
+    }
+}
 ?>
+</body>
+</html>
