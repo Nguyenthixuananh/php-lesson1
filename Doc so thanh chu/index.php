@@ -1,137 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Read numbers into letters </title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
-<h2>Read numbers</h2>
-<form>
-    <input type="text" name="search" placeholder="Enter number"/>
-    <input type="submit" id="submit" value="Read"/>
+<form action="" method="get">
+    <input type="number" name="number">
+    <button>Submit</button>
 </form>
-<?php
-$num = $_REQUEST["search"];
-if ($num < 20 && $num >= 0){
-    switch ($num < 10 && $num >= 0) {
-        case $num==0:echo "Zero"; break;
-        case $num==1:echo "One"; break;
-        case $num==2: echo "Two"; break;
-        case $num==3:echo "Three"; break;
-        case $num==4: echo "Four"; break;
-        case $num==5:echo "Five"; break;
-        case $num==6:echo "Six"; break;
-        case $num==7:echo "Seven"; break;
-        case $num==8:echo "Eight"; break;
-        case $num==9:echo "Nine"; break;
-    }
-    switch ($num < 20 && $num >= 10) {
-        case $num==10: echo "Ten"; break;
-        case $num==11: echo "Eleven"; break;
-        case $num==12: echo "Twelve"; break;
-        case $num==13: echo "Thirteen"; break;
-        case $num==14: echo "Fourteen"; break;
-        case $num==15: echo "Fifteen"; break;
-        case $num==16: echo "Sixteen"; break;
-        case $num==17: echo "Seventeen"; break;
-        case $num==18: echo "Eighteen"; break;
-        case $num==19: echo "Nineteen"; break;
-    }
-}
-if ($num >= 20 && $num <100) {
-    $a = $num % 10;
-    $b = ($num/10) % 10;
-    switch ($b) {
-        case 2; echo "Twenty "; break;
-        case 3; echo "Thirty "; break;
-        case 4; echo "Forty "; break;
-        case 5; echo "Fifty "; break;
-        case 6; echo "Sixty "; break;
-        case 7; echo "Seventy "; break;
-        case 8; echo "Eighty "; break;
-        case 9; echo "Ninety "; break;
-    }
-    switch ($a) {
-        case 1:echo " One"; break;
-        case 2: echo " Two"; break;
-        case 3:echo " Three"; break;
-        case 4: echo " Four"; break;
-        case 5:echo " Five"; break;
-        case 6:echo " Six"; break;
-        case 7:echo " Seven"; break;
-        case 8:echo " Eight"; break;
-        case 9:echo " Nine"; break;
-    }
-}
-if ($num>+100 && $num<=999) {
-    $a = $num % 10;
-    $b = ($num/10) % 10;
-    $c = ($num/100) % 10;
-    if ($b%10!=1) {
-        switch ($c) {
-            case 1: echo "One hundreds "; break;
-            case 2: echo "Two hundreds "; break;
-            case 3: echo "Three hundreds "; break;
-            case 4: echo "Four hundreds "; break;
-            case 5: echo "Five hundreds "; break;
-            case 6: echo "Six hundreds "; break;
-            case 7: echo "Seven hundreds "; break;
-            case 8: echo "Eight hundreds "; break;
-            case 9: echo "Nine hundreds "; break;
-        }
-        if ($b%10==0 && $a !=0) {
-            echo("and ");
-        }
-        switch ($b) {
-            case 2; echo "Twenty "; break;
-            case 3; echo "Thirty "; break;
-            case 4; echo "Forty "; break;
-            case 5; echo "Fifty "; break;
-            case 6; echo "Sixty "; break;
-            case 7; echo "Seventy "; break;
-            case 8; echo "Eighty "; break;
-            case 9; echo "Ninety "; break;
-        }
-        switch ($a) {
-            case 1:echo "One"; break;
-            case 2: echo "Two"; break;
-            case 3:echo "Three"; break;
-            case 4: echo "Four"; break;
-            case 5:echo "Five"; break;
-            case 6:echo "Six"; break;
-            case 7:echo "Seven"; break;
-            case 8:echo "Eight"; break;
-            case 9:echo "Nine"; break;
-        }
-    }
-    if ($b%10==1) {
-        switch ($c) {
-            case 1: echo "One hundreds "; break;
-            case 2: echo "Two hundreds "; break;
-            case 3: echo "Three hundreds "; break;
-            case 4: echo "Four hundreds "; break;
-            case 5: echo "Five hundreds "; break;
-            case 6: echo "Six hundreds "; break;
-            case 7: echo "Seven hundreds "; break;
-            case 8: echo "Eight hundreds "; break;
-            case 9: echo "Nine hundreds "; break;
-        }
-
-        switch ($a) {
-            case 0; echo "Ten"; break;
-            case 1; echo "Eleven"; break;
-            case 2; echo "Twelve"; break;
-            case 3; echo "Thirteen"; break;
-            case 4; echo "Fourteen"; break;
-            case 5; echo "Fiveteen"; break;
-            case 6; echo "Sixteen"; break;
-            case 7; echo "Seventeen"; break;
-            case 8; echo "Eighteen"; break;
-            case 9; echo "Nineteen"; break;
-        }
-
-    }
-}
-?>
 </body>
 </html>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if (isset($_GET["number"])) {
+        readNumber($_GET["number"]);
+    }
+}
+//Xu ly logic
+function readNumber($number)
+{
+    if ($number < 10) {
+        echo numberOneDigit($number);
+    } else if ($number < 100) {
+        echo numberTwoDigit($number);
+    } else if ($number < 1000) {
+        echo numberThreeDigit($number);
+    }
+}
+
+function numberOneDigit($number)
+{
+    $arr = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    return $arr[$number];
+}
+
+function numberTwoDigit($number)
+{
+    $teen = [10 => "ten", 11 => "eleven", 12 => "twelve", 13 => "thirteen", 14 => "fourteen", 15 => "fifteen", 16 => "sixteen", 17 => "seventeen", 18 => "eighteen", 19 => "nineteen"];
+    $ty = [2 => "twenty", 3 => "thirty", 4 => "forty", 5 => "fifty", 6 => "sixty", 7 => "seventy", 8 => "eighty", 9 => "ninety"];
+    if ($number < 20) {
+        return $teen[$number];
+    } else {
+        if ($number % 10 == 0)
+            return $ty[$number[0]];
+        else
+            return $ty[$number[0]] . " " . numberOneDigit($number[1]);
+    }
+}
+
+function numberThreeDigit($number)
+{
+    $arr = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    if($number %100==0) {
+        return $arr[$number[0]]."hundred";
+    } else if ($number[1]==0) {
+        return $arr[$number[0]]." hundred and ".numberOneDigit($number[2]);
+    } else {
+        $twoDigit = $number[1].$number[2];
+        return $arr[$number[0]]." hudred ".numberTwoDigit($twoDigit);
+    }
+
+}

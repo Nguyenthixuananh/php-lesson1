@@ -8,11 +8,12 @@
     <title>Future Value Calculator</title>
 </head>
 <body>
-<form method="get" action="">
+<form method="post" action="">
     <table>
         <tr>
             <td>Inventment Amount:</td>
-            <td><input type="text" name="money" value="<?php echo isset($_GET["money"])?$_GET["money"]:0?>" placeholder="Enter inventment amount"></td> //isset: ktra xem co ton tai hay k
+            <td><input type="text" name="money" value="<?php echo isset($_POST["money"])?$_POST["money"]:0?>" placeholder="Enter inventment amount"></td>
+<!--            //isset: ktra xem co ton tai hay k-->
         </tr>
         <tr>
             <td>Yearly Interest Rate:</td>
@@ -33,7 +34,7 @@
 </html>
 <?php
 
-if ($_SERVER['REQUEST_METHOD']=='GET') {
+if ($_SERVER['REQUEST_METHOD']=='POST') {
     $money = $_POST["money"];
     $rate = $_POST["rate"];
     $years = $_POST["years"];

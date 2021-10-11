@@ -28,18 +28,24 @@ function isPrimeNumber($n)
     }
     return true;
 }
-if ($_SERVER["REQUEST_METHOD"]=="POST") {
-    $num = $_POST["input"];
-    $count =0;
-    $N =2;
-    for ($i=0; $i<$num; $i++) {
-        while ($count<$num) {
-            if (isPrimeNumber($N)) {
-                echo $N.' ';
-                $count++;
-            } $N++;
+
+function listPrime($num)
+{
+    $count = 0;
+    $N = 2;
+
+    while ($count < $num) {
+        if (isPrimeNumber($N)) {
+            echo $N . ' ';
+            $count++;
         }
+        $N++;
     }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $num = $_POST["input"];
+    listPrime($num);
 }
 ?>
 
